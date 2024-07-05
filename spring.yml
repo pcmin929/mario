@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-spring
+  namespace: mario
+spec:
+  selector:
+    app: spring
+  ports:
+  - port: 80
+    targetPort: 8085
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-dep
+  namespace: mario
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring
+  template:
+    metadata:
+      name: spring-pod
+      labels:
+        app: spring
+    spec:
+      containers:
+      - name: spring-con
+        image: 61.254.18.30:5000/pcm/build-spring:1

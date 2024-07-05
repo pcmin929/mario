@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-tem
+  namespace: mario
+spec:
+  selector:
+    app: tem
+  ports:
+  - port: 80
+    targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tem-dep
+  namespace: mario
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tem
+  template:
+    metadata:
+      name: tem-pod
+      labels:
+        app: tem
+    spec:
+      containers:
+      - name: tem-con
+        image: 61.254.18.30:5000/pcm/tem:2
+        readinessProbe:
+          exec:
+            command: ["ls","/healthz"]
+          initialDelaySeconds: 10
+          periodSeconds: 3
