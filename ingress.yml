@@ -5,9 +5,8 @@ metadata:
   namespace: mario
   annotations:
     kubernetes.io/ingress.class: "nginx"
-#    nginx.ingress.kubernetes.io/rewrite-target: /
-# ilove.k8s.com/tem 경로로 들어갔을때 ilove.k8s.com/ 로 접속되는게 rewrite-target인데,
-# free template을 배포할때 오히려 문제를 일으키기때문에 주석처리.
+    nginx.ingress.kubernetes.io/rewrite-target: /
+
 spec:
   rules:
     - host: ilove.k8s.com
