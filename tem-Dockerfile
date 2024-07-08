@@ -1,3 +1,3 @@
 FROM nginx
 ADD sbs-html /usr/share/nginx/html
-RUN mkdir /healthz
+RUN mkdir /healthz #readinessprobe를 위한 폴더 생성
